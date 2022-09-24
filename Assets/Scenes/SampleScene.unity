@@ -221,6 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1870821757}
+  speed: 3
 --- !u!1 &673593257
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,7 +280,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d2c764fa2e801484e81268ba86ce6c7b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: efb2441cfdfcf4448b6d879efb4e84d9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -326,7 +327,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdf57a9de01e4d84d8dfa6bace2a94ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  smallBlueFish: {fileID: 5585408154461070588, guid: 9c740b3347c57b14b92d147ff2d0ac40, type: 3}
+  smallGreenFish: {fileID: 8793299114747581460, guid: 70aa436589d4c8147ac3e79c911e60b3, type: 3}
   smallOrangeFish: {fileID: 7312905712067729820, guid: c880a9e86baadd14e81a8b910ae697e3, type: 3}
+  smallYellowFish: {fileID: 8667828200951525827, guid: e81bd1f5eeecc824e988fbb8f4afc676, type: 3}
   player: {fileID: 1870821757}
   playerCamera: {fileID: 519420031}
 --- !u!4 &1412669409

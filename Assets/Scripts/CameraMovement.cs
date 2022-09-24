@@ -5,16 +5,28 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     public GameObject player;
+    public float speed;
 
-    // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(FollowPlayer());
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator FollowPlayer()
     {
-        transform.position = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
+        Vector2 cameraPosition;
+        Vector2 playerPosition;
+        Vector3 distance;
+
+        while (true)
+        {
+            cameraPosition = new Vector2(transform.position.x, transform.position.y);
+            playerPosition = new Vector2(player.transform.position.x, player.transform.position.y);
+            distance = new Vector3(playerPosition.x - cameraPosition.x, playerPosition.y - cameraPosition.y, 0f);
+
+            transform.Translate(distance * speed * Time.deltaTime);
+
+            yield return new WaitForFixedUpdate();
+        }
     }
 }

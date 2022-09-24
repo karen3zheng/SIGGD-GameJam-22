@@ -8,6 +8,22 @@ public class Fish : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private bool isGoingRight = true;
 
+    public FishBase FishBase
+    {
+        get
+        {
+            return fishBase;
+        }
+    }
+
+    public bool IsGoingRight
+    {
+        get
+        {
+            return isGoingRight;
+        }
+    }
+
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();

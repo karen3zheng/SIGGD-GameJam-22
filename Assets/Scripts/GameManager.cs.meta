@@ -3,7 +3,10 @@ guid: bdf57a9de01e4d84d8dfa6bace2a94ff
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - smallOrangeFish: {instanceID: 0}
+  - player: {instanceID: 0}
+  - playerCamera: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
