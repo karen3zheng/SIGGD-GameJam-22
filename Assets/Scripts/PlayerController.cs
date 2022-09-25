@@ -9,6 +9,8 @@ using static UnityEngine.GraphicsBuffer;
 public class PlayerController : MonoBehaviour
 {
     private Animator animator;
+    private static int GAME_HEIGHT = 3100;
+    private static int GAME_WIDTH = 5500;
 
     // Start is called before the first frame update
     void Start()
@@ -86,9 +88,121 @@ public class PlayerController : MonoBehaviour
             Quaternion target = Quaternion.Euler(0, 0, angle);
             transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * smooth);
 
+            Vector3 direction;
+
             //Sets direction vector, either directly up or nothing
-            Vector3 direction = new Vector3(0, moveCheck, 0);
-            
+            if (transform.position.x < -GAME_WIDTH / 2)
+            {
+                if (angle > 0 && angle < 90)
+                {
+                    direction = new Vector3(moveCheck, 0, 0);
+                }
+                else if (angle > 90 && angle < 180)
+                {
+                    direction = new Vector3(-moveCheck, 0, 0);
+                }
+                else if (angle == 90)
+                {
+                    direction = new Vector3(0, -moveCheck, 0);
+                }
+                else if (angle == 0)
+                {
+                    direction = new Vector3(moveCheck, 0, 0);
+                }
+                else if (angle == 180)
+                {
+                    direction = new Vector3(-moveCheck, 0, 0);
+                }
+                else
+                {
+                    direction = new Vector3(0, moveCheck, 0);
+                }
+            }
+            else if (transform.position.x > GAME_WIDTH / 2)
+            {
+                if (angle < 0 && angle > -90)
+                {
+                    direction = new Vector3(-moveCheck, 0, 0);
+                }
+                else if (angle < -90 && angle > -180)
+                {
+                    direction = new Vector3(moveCheck, 0, 0);
+                }
+                else if (angle == -90)
+                {
+                    direction = new Vector3(0, -moveCheck, 0);
+                }
+                else if (angle == 0)
+                {
+                    direction = new Vector3(-moveCheck, 0, 0);
+                }
+                else if (angle == -180)
+                {
+                    direction = new Vector3(moveCheck, 0, 0);
+                }
+                else
+                {
+                    direction = new Vector3(0, moveCheck, 0);
+                }
+            }
+            else if (transform.position.y > GAME_HEIGHT / 2)
+            {
+                if (angle > 0 && angle < 90)
+                {
+                    direction = new Vector3(-moveCheck, 0, 0);
+                }
+                else if (angle < 0 && angle > -90)
+                {
+                    direction = new Vector3(moveCheck, 0, 0);
+                }
+                else if (angle == 0)
+                {
+                    direction = new Vector3(0, -moveCheck, 0);
+                }
+                else if (angle == 90)
+                {
+                    direction = new Vector3(-moveCheck, 0, 0);
+                }
+                else if (angle == -90)
+                {
+                    direction = new Vector3(moveCheck, 0, 0);
+                }
+                else
+                {
+                    direction = new Vector3(0, moveCheck, 0);
+                }
+            }
+            else if (transform.position.y < -GAME_HEIGHT / 2)
+            {
+                if (angle > 90 && angle < 180)
+                {
+                    direction = new Vector3(moveCheck, 0, 0);
+                }
+                else if (angle < -90 && angle > -180)
+                {
+                    direction = new Vector3(-moveCheck, 0, 0);
+                }
+                else if (angle == 180 || angle == -180)
+                {
+                    direction = new Vector3(0, -moveCheck, 0);
+                }
+                else if (angle == 90)
+                {
+                    direction = new Vector3(moveCheck, 0, 0);
+                }
+                else if (angle == -90)
+                {
+                    direction = new Vector3(-moveCheck, 0, 0);
+                }
+                else
+                {
+                    direction = new Vector3(0, moveCheck, 0);
+                }
+            }
+            else
+            {
+                direction = new Vector3(0, moveCheck, 0);
+            }
             //Sets velocity
             transform.Translate(direction * moveSpeed * Time.deltaTime);
 

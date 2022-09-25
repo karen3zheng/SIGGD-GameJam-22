@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private static int GAME_HEIGHT = 4320;
-    private static int GAME_WIDTH = 7680;
+    private static int GAME_HEIGHT = 3100;
+    private static int GAME_WIDTH = 5500;
+
+    private static int GROWTH_THRESHOLD_1 = 15;
+    private static int GROWTH_THRESHOLD_2 = 100;
+    private static int GROWTH_THRESHOLD_3 = 700;
 
     // References to fish prefabs
     [SerializeField] GameObject smallBlueFish;
@@ -13,33 +17,57 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject smallOrangeFish;
     [SerializeField] GameObject smallYellowFish;
 
-    // Array of all small fish prefabs
-    GameObject[] smallFishArray;
+    [SerializeField] GameObject medGrayFish;
+    [SerializeField] GameObject medPinkFish;
+    [SerializeField] GameObject medPurpleFish;
 
-    // List to hold all created fish objects (???)
-    ArrayList allFishList = new ArrayList();
+    [SerializeField] GameObject bigGreenFish;
+    [SerializeField] GameObject bigRedFish;
+    [SerializeField] GameObject bigSharkFish;
 
-    // References to player and camera
+    // Array of all fish types
+    GameObject[] fishArray;
+
+    // References to game object
     public GameObject player;
     public Camera playerCamera;
+    public GameObject fishManager;
+    public GameObject display;
 
-    private Coroutine fishSpawner;
-    int count = 0;
+    // Game variables
+    public int growthPoints;
+    public int playerGrowthLevel = 1;
 
     // Start is called before the first frame update
     void Start()
     {
-        smallFishArray = new GameObject[] { smallBlueFish, smallGreenFish, smallOrangeFish, smallYellowFish };
+        fishArray = new GameObject[] { smallBlueFish, smallGreenFish, smallOrangeFish, smallYellowFish, 
+                                       medGrayFish, medPinkFish, medPurpleFish,
+                                       bigGreenFish, bigRedFish, bigSharkFish };
+        for (int i = 0; i < fishArray.Length; i++)
+        {
+            Fish fish = fishArray[i].gameObject.GetComponent<Fish>();
+            fish.FishBase.SetCount(0);
+        }
         StartCoroutine(BoundsChecker());
+        StartCoroutine(SpawnFishCoroutine(fishArray));
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Start fish spawner if it is not already spawning
-        if (fishSpawner == null)
+        if (CanGrow())
         {
-            fishSpawner = StartCoroutine(SpawnFishCoroutine(smallFishArray));
+            playerGrowthLevel++;
+            player.GetComponent<PlayerZoom>().ZoomOut((int) playerCamera.orthographicSize * 3);
+        }
+
+        foreach (Transform child in fishManager.transform) {
+            Fish fish = child.gameObject.GetComponent<Fish>();
+            if (fish.FishBase.GetSize() > growthPoints)
+            {
+                fish.FishBase.SetCanEatPlayer(true);
+            }
         }
     }
 
@@ -62,7 +90,9 @@ public class GameManager : MonoBehaviour
         newFishY = Random.Range(-GAME_HEIGHT / 2, GAME_HEIGHT / 2);
 
         // Instantiate fish object
-        GameObject newFish = Instantiate(fishToSpawn, new Vector3(newFishX, newFishY, 1), Quaternion.identity);
+        GameObject newFish = Instantiate(fishToSpawn, new Vector3(newFishX, newFishY, 1), Quaternion.identity, fishManager.transform);
+        newFish.GetComponent<Fish>().FishBase.AddFish();
+
         if (direction.Equals("RIGHT"))
         {
             newFish.GetComponent<Fish>().setIsGoingRight(true);
@@ -71,30 +101,31 @@ public class GameManager : MonoBehaviour
             newFish.GetComponent<Fish>().setIsGoingRight(false);
         }
 
-        // Add instantiated fish object to list
-        allFishList.Add(newFish);
     }
 
     private IEnumerator SpawnFishCoroutine(GameObject[] fishArray)
     {
         // While there are less fish than the max count, spawn a random fish from the array every second
-        while (count < fishArray[0].gameObject.GetComponent<Fish>().FishBase.MaxCount)
+        while (true)
         {
             int randomNum = Random.Range(0, fishArray.Length);
-            SpawnFish(fishArray[randomNum]);
-            count++;
-            yield return new WaitForSeconds(1f);
+            Fish randomFish = fishArray[randomNum].gameObject.GetComponent<Fish>();
+            if (randomFish.FishBase.GetCount() < randomFish.FishBase.GetMaxCount())
+            {
+                SpawnFish(fishArray[randomNum]);
+            }
+            yield return new WaitForSeconds(0.5f);
         }
-        fishSpawner = null;
     }
 
-    // Remove fish that go off the screen
+    // Flip fish when they get to the edge of the screen
     private IEnumerator BoundsChecker()
     {
         while (true)
         {
-            foreach (GameObject fish in allFishList)
+            foreach (Transform child in fishManager.transform)
             {
+                GameObject fish = child.gameObject;
                 Fish fishComponent = fish.GetComponent<Fish>();
                 if (fishComponent.IsGoingRight && fish.transform.position.x > GAME_WIDTH / 2)
                 {
@@ -110,5 +141,48 @@ public class GameManager : MonoBehaviour
 
             yield return new WaitForFixedUpdate();
         }
+    }
+
+    public void DestroyFish(GameObject fish)
+    {
+        fish.GetComponent<Fish>().FishBase.RemoveFish();
+        Destroy(fish);
+    }
+
+    public void AddGrowthPoints(int amount)
+    {
+        growthPoints += amount;
+        display.GetComponent<GameDisplay>().DisplayScore(growthPoints);
+        if (growthPoints > GROWTH_THRESHOLD_3)
+        {
+            WinGame();
+        }
+    }
+
+    public bool CanGrow()
+    {
+        if (playerGrowthLevel == 1 && growthPoints >= GROWTH_THRESHOLD_1)
+        {
+            return true;
+        } else if (playerGrowthLevel == 2 && growthPoints >= GROWTH_THRESHOLD_2)
+        {
+            return true;
+        } else if (playerGrowthLevel == 3 && growthPoints >= GROWTH_THRESHOLD_3)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public void LoseGame()
+    {
+        Debug.Log("Game Over");
+        player.SetActive(false);
+    }
+
+    public void WinGame()
+    {
+        Debug.Log("You win");
+        player.SetActive(false);
     }
 }

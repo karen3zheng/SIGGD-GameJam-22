@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishName: BigRedFish
   sprite: {fileID: 21300000, guid: b9f591885c4085b4ca4db449a11b9ba3, type: 3}
-  size: 0
+  size: 100
   speed: 700
-  pointValue: 0
-  canEatPlayer: 0
+  pointValue: 10
   maxCount: 10
+  count: 0

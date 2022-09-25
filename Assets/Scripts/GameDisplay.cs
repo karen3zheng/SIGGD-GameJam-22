@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Timer : MonoBehaviour
+public class GameDisplay : MonoBehaviour
 {
     public GameObject timeDigit1;
     public GameObject timeDigit2;
     public GameObject timeDigit3;
     public GameObject timeDigit4;
+
+    public GameObject scoreDigit1;
+    public GameObject scoreDigit2;
+    public GameObject scoreDigit3;
 
     public Sprite oneDigitRed;
     public Sprite twoDigitRed;
@@ -37,9 +41,14 @@ public class Timer : MonoBehaviour
     private Coroutine gameTimer;
     int urgentThreshold = 10;
 
+    public GameObject gameManagerObject;
+    private GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = gameManagerObject.GetComponent<GameManager>();
+        DisplayScore(0);
         if (gameTimer == null)
         {
             gameTimer = StartCoroutine(TimeCoroutine(30));
@@ -56,26 +65,34 @@ public class Timer : MonoBehaviour
     {
         while (seconds >= 0)
         {
-            displayTime(seconds);
+            DisplayTime(seconds);
             seconds--;
             yield return new WaitForSeconds(1f);
         }
+        gameManager.LoseGame();
         gameTimer = null;
     }
 
-    private void displayTime(int seconds)
+    private void DisplayTime(int seconds)
     {
         int extraSeconds = seconds % 60;
         int minutes = seconds / 60;
         bool isUrgent = seconds <= urgentThreshold;
 
-        setDigit(timeDigit1, minutes, isUrgent);
-        setDigit(timeDigit2, -1, isUrgent);
-        setDigit(timeDigit3, extraSeconds / 10, isUrgent);
-        setDigit(timeDigit4, extraSeconds % 10, isUrgent);
+        SetDigit(timeDigit1, minutes, isUrgent);
+        SetDigit(timeDigit2, -1, isUrgent);
+        SetDigit(timeDigit3, extraSeconds / 10, isUrgent);
+        SetDigit(timeDigit4, extraSeconds % 10, isUrgent);
     }
 
-    private void setDigit(GameObject digitObject, int digit, bool isRed)
+    public void DisplayScore(int score)
+    {
+        SetDigit(scoreDigit1, score / 100, false);
+        SetDigit(scoreDigit2, (score % 100) / 10, false);
+        SetDigit(scoreDigit3, (score % 100) % 10, false);
+    }
+
+    private void SetDigit(GameObject digitObject, int digit, bool isRed)
     {
         switch (digit)
         {

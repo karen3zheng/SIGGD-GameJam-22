@@ -11,8 +11,50 @@ public class FishBase : ScriptableObject
     [SerializeField] int size;
     [SerializeField] float speed;
     [SerializeField] int pointValue;
-    [SerializeField] bool canEatPlayer;
+    private bool canEatPlayer;
     [SerializeField] int maxCount;
+
+    public int count = 0;
+
+    public void AddFish()
+    {
+        count++;
+    }
+
+    public void RemoveFish()
+    {
+        count--;
+    }
+
+    public int GetCount()
+    {
+        return count;
+    }
+
+    public void SetCount(int newCount)
+    {
+        count = newCount;
+    }
+
+    public int GetMaxCount()
+    {
+        return maxCount;
+    }
+
+    public int GetSize()
+    {
+        return size;
+    }
+
+    public bool GetCanEatPlayer()
+    {
+        return canEatPlayer;
+    }
+
+    public void SetCanEatPlayer(bool canEat)
+    {
+        canEatPlayer = canEat;
+    }
 
     public string FishName
     {
@@ -30,13 +72,6 @@ public class FishBase : ScriptableObject
         }
     }
 
-    public int Size
-    {
-        get
-        {
-            return size;
-        }
-    }
 
     public float Speed
     {
@@ -54,20 +89,6 @@ public class FishBase : ScriptableObject
         }
     }
 
-    public bool CanEatPlayer
-    {
-        get
-        {
-            return canEatPlayer;
-        }
-    }
 
-    public int MaxCount
-    {
-        get
-        {
-            return maxCount;
-        }
-    }
-
+    
 }

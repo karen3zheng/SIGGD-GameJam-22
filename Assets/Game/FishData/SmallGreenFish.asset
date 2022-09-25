@@ -16,6 +16,6 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 9feaf0988452d264691b065608003a3d, type: 3}
   size: 0
   speed: 300
-  pointValue: 0
-  canEatPlayer: 0
-  maxCount: 20
+  pointValue: 1
+  maxCount: 10
+  count: 0

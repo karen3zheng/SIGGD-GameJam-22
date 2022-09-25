@@ -17,5 +17,5 @@ MonoBehaviour:
   size: 0
   speed: 500
   pointValue: 0
-  canEatPlayer: 0
   maxCount: 15
+  count: 0
