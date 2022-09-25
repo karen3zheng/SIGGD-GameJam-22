@@ -44,7 +44,8 @@ public class Fish : MonoBehaviour
         if (isGoingRight)
         {
             transform.position = new Vector3(transform.position.x + fishBase.Speed * Time.deltaTime, transform.position.y);
-        } else
+        }
+        else
         {
             transform.position = new Vector3(transform.position.x - fishBase.Speed * Time.deltaTime, transform.position.y);
         }
@@ -53,5 +54,17 @@ public class Fish : MonoBehaviour
     public void setIsGoingRight(bool isGoingRight)
     {
         this.isGoingRight = isGoingRight;
+    }
+
+    public void flipSprite()
+    {
+        if (spriteRenderer.flipX)
+        {
+            spriteRenderer.flipX = false;
+        }
+        else
+        {
+            spriteRenderer.flipX = true;
+        }
     }
 }

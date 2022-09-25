@@ -8,9 +8,12 @@ using static UnityEngine.GraphicsBuffer;
 
 public class PlayerController : MonoBehaviour
 {
+    private Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         StartCoroutine(Movement());
     }
 
@@ -88,6 +91,8 @@ public class PlayerController : MonoBehaviour
             
             //Sets velocity
             transform.Translate(direction * moveSpeed * Time.deltaTime);
+
+            animator.SetFloat("moveSpeed", moveSpeed);
             
             //Waits to run until the next fixed update
             yield return new WaitForFixedUpdate();

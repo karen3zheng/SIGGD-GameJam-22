@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         smallFishArray = new GameObject[] { smallBlueFish, smallGreenFish, smallOrangeFish, smallYellowFish };
+        StartCoroutine(BoundsChecker());
     }
 
     // Update is called once per frame
@@ -88,18 +89,26 @@ public class GameManager : MonoBehaviour
     }
 
     // Remove fish that go off the screen
-    private void CleanFish()
+    private IEnumerator BoundsChecker()
     {
-        foreach (GameObject fish in allFishList) {
-            if (fish.GetComponent<Fish>().IsGoingRight && fish.transform.position.x > GAME_WIDTH / 2)
+        while (true)
+        {
+            foreach (GameObject fish in allFishList)
             {
-                allFishList.Remove(fish);
-                Destroy(fish);
-            } else if (fish.transform.position.x < -GAME_WIDTH / 2)
-            {
-                allFishList.Remove(fish);
-                Destroy(fish);
+                Fish fishComponent = fish.GetComponent<Fish>();
+                if (fishComponent.IsGoingRight && fish.transform.position.x > GAME_WIDTH / 2)
+                {
+                    fishComponent.setIsGoingRight(false);
+                    fishComponent.flipSprite();
+                }
+                else if (fish.transform.position.x < -GAME_WIDTH / 2)
+                {
+                    fishComponent.setIsGoingRight(true);
+                    fishComponent.flipSprite();
+                }
             }
+
+            yield return new WaitForFixedUpdate();
         }
     }
 }

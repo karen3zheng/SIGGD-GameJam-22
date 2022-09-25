@@ -124,4 +124,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f3d69a08837c784680da1902fdde99e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishBase: {fileID: 0}
+  fishBase: {fileID: 11400000, guid: 6b8d2c164b785594ebd8e4025c6ff959, type: 2}
