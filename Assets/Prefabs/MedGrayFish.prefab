@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5425570027980072507}
   - component: {fileID: 5641964049815038579}
-  - component: {fileID: 2314192301019275364}
   - component: {fileID: 5688247564782446151}
+  - component: {fileID: 9166950971841646915}
   m_Layer: 0
   m_Name: MedGrayFish
   m_TagString: Untagged
@@ -86,32 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &2314192301019275364
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7520301162101120613}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.1852665, y: -0.02612868}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6.17, y: 3.27}
-    newSize: {x: 6.17, y: 3.27}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 4.700656, y: 1.6101556}
-  m_EdgeRadius: 0
 --- !u!114 &5688247564782446151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,3 +99,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishBase: {fileID: 11400000, guid: a3b9c7d9643334045a182b334d64df46, type: 2}
+--- !u!70 &9166950971841646915
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7520301162101120613}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.53985673, y: -0.0927887}
+  m_Size: {x: 2.9983494, y: 1.1611837}
+  m_Direction: 1

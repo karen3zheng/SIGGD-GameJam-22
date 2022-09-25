@@ -17,5 +17,6 @@ MonoBehaviour:
   size: 0
   speed: 300
   pointValue: 1
-  maxCount: 10
-  count: 0
+  canEatPlayer: 0
+  maxCount: 15
+  count: 3

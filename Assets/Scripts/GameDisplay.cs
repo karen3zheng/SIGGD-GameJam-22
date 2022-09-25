@@ -51,7 +51,7 @@ public class GameDisplay : MonoBehaviour
         DisplayScore(0);
         if (gameTimer == null)
         {
-            gameTimer = StartCoroutine(TimeCoroutine(30));
+            gameTimer = StartCoroutine(TimeCoroutine(150));
         }
     }
 

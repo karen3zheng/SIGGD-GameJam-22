@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishName: MedPinkFish
   sprite: {fileID: 21300000, guid: 5ea5b1b9dd2d5104290d5917b86417e5, type: 3}
-  size: 15
-  speed: 500
+  size: 5
+  speed: 200
   pointValue: 3
-  maxCount: 15
-  count: 1
+  canEatPlayer: 1
+  maxCount: 10
+  count: 4

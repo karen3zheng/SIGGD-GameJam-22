@@ -11,7 +11,7 @@ public class FishBase : ScriptableObject
     [SerializeField] int size;
     [SerializeField] float speed;
     [SerializeField] int pointValue;
-    private bool canEatPlayer;
+    public bool canEatPlayer;
     [SerializeField] int maxCount;
 
     public int count = 0;

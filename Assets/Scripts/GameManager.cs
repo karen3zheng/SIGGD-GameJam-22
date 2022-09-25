@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     private static int GAME_HEIGHT = 3100;
-    private static int GAME_WIDTH = 5500;
+    private static int GAME_WIDTH = 8670;
 
-    private static int GROWTH_THRESHOLD_1 = 15;
+    private static int GROWTH_THRESHOLD_1 = 5;
     private static int GROWTH_THRESHOLD_2 = 100;
-    private static int GROWTH_THRESHOLD_3 = 700;
+    private static int GROWTH_THRESHOLD_3 = 250;
 
     // References to fish prefabs
     [SerializeField] GameObject smallBlueFish;
@@ -67,6 +68,9 @@ public class GameManager : MonoBehaviour
             if (fish.FishBase.GetSize() > growthPoints)
             {
                 fish.FishBase.SetCanEatPlayer(true);
+            } else
+            {
+                fish.FishBase.SetCanEatPlayer(false);
             }
         }
     }
@@ -114,7 +118,7 @@ public class GameManager : MonoBehaviour
             {
                 SpawnFish(fishArray[randomNum]);
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1f);
         }
     }
 
@@ -178,11 +182,13 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Game Over");
         player.SetActive(false);
+        SceneManager.LoadScene(4);
     }
 
     public void WinGame()
     {
         Debug.Log("You win");
         player.SetActive(false);
+        SceneManager.LoadScene(3);
     }
 }

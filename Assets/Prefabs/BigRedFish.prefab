@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7723803560220526584}
   - component: {fileID: 8873768106053275659}
-  - component: {fileID: 3212383510633453541}
   - component: {fileID: 2736211306212973139}
+  - component: {fileID: 3336690398360102111}
   m_Layer: 0
   m_Name: BigRedFish
   m_TagString: Untagged
@@ -86,32 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &3212383510633453541
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7718658247541557219}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.59303975, y: -0.19767857}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 9.96, y: 7.76}
-    newSize: {x: 9.96, y: 7.76}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 7.5574355, y: 5.844036}
-  m_EdgeRadius: 0
 --- !u!114 &2736211306212973139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,3 +99,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishBase: {fileID: 11400000, guid: feda6785c240e7747a443780c63f0598, type: 2}
+--- !u!70 &3336690398360102111
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7718658247541557219}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.2843946, y: -0.30081603}
+  m_Size: {x: 5.4476886, y: 4.7315807}
+  m_Direction: 1
